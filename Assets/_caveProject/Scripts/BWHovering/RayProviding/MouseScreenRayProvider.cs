@@ -6,7 +6,7 @@ namespace Buildwise.Hovering
     {
         public override Ray CreateRay()
         {
-            Vector2 mousePosition = _caveControls.InGame.point.ReadValue<Vector2>();
+            Vector2 mousePosition = _bwControls.InGame.point.ReadValue<Vector2>();
             //return Camera.main.ScreenPointToRay(Input.mousePosition);
             return Camera.main.ScreenPointToRay(mousePosition);
         }

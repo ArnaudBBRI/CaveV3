@@ -7,11 +7,11 @@ using UnityEngine;
 /// </summary>
 public class ControlsManager : MonoBehaviour
 {
-    public static CaveControls CaveControls;
+    public static BWControls BWControls;
     // Start is called before the first frame update
     void Awake()
     {
-        CaveControls = new CaveControls();
-        CaveControls.InGame.Enable();
+        BWControls = new BWControls();
+        BWControls.InGame.Enable();
     }
 }

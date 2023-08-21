@@ -11,11 +11,11 @@ namespace Buildwise.Hovering
         [SerializeField]
         private RayCastHitVariable _hoveredHit;
 
-        protected CaveControls _caveControls;
+        protected BWControls _bwControls;
 
-        private void Awake()
+        private void Start()
         {
-            _caveControls = ControlsManager.CaveControls;
+            _bwControls = ControlsManager.BWControls;
         }
 
         public abstract Ray CreateRay();

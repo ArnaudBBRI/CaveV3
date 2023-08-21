@@ -7,6 +7,7 @@
 //                                                                           //
 //===========================================================================//
 
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -59,30 +60,6 @@ public class FreeFlyCamera : MonoBehaviour
     [Tooltip("Boost speed")]
     private KeyCode _boostSpeed = KeyCode.LeftShift;
 
-    [SerializeField]
-    [Tooltip("Move up")]
-    private KeyCode _moveUp = KeyCode.A;
-
-    [SerializeField]
-    [Tooltip("Move down")]
-    private KeyCode _moveDown = KeyCode.E;
-    
-    [SerializeField]
-    [Tooltip("Move forward")]
-    private KeyCode _moveForward = KeyCode.Z;
-
-    [SerializeField]
-    [Tooltip("Move backwards")]
-    private KeyCode _moveBackwards = KeyCode.S;
-
-    [SerializeField]
-    [Tooltip("Move left")]
-    private KeyCode _moveLeft = KeyCode.Q;
-
-    [SerializeField]
-    [Tooltip("Move right")]
-    private KeyCode _moveRight = KeyCode.D;
-
     [Space]
 
     [SerializeField]
@@ -110,6 +87,8 @@ public class FreeFlyCamera : MonoBehaviour
     private Vector3 _initPosition;
     private Vector3 _initRotation;
 
+    private BWControls controls;
+
 #if UNITY_EDITOR
     private void OnValidate()
     {
@@ -117,6 +96,15 @@ public class FreeFlyCamera : MonoBehaviour
             _boostedSpeed = _movementSpeed;
     }
 #endif
+
+
+    private void Awake()
+    {
+        controls = ControlsManager.BWControls;
+        controls.InGame.restart.performed += ctx => ResetPosition();
+        controls.InGame.changeCursorMode.performed += ctx => SetCursorState();
+    }
+
 
 
     private void Start()
@@ -134,11 +122,11 @@ public class FreeFlyCamera : MonoBehaviour
     // Apply requested cursor state
     private void SetCursorState()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && _hasEscBeenPressedRecently)
+        if (_hasEscBeenPressedRecently)
         {
             _wantedMode = CursorLockMode.Locked;
         }
-        else if (Input.GetKeyDown(KeyCode.Escape))
+        else
         {
             Cursor.lockState = _wantedMode = CursorLockMode.None;
             _hasEscBeenPressedRecently = true;
@@ -176,7 +164,7 @@ public class FreeFlyCamera : MonoBehaviour
         if (!_active)
             return;
 
-        SetCursorState();
+        //SetCursorState();
 
         /*
         if (Cursor.visible)
@@ -189,35 +177,32 @@ public class FreeFlyCamera : MonoBehaviour
         }
 
         // Movement
-        if (_enableMovement)
+        Vector2 moveVector = controls.InGame.move.ReadValue<Vector2>();
+        Vector2 lookVector = controls.InGame.look.ReadValue<Vector2>();
+        float upDownVector = controls.InGame.verticalMove.ReadValue<float>();
+        
+        if (_enableMovement && (moveVector != Vector2.zero || upDownVector != 0.0f))
         {
             Vector3 deltaPosition = Vector3.zero;
             float currentSpeed = _movementSpeed;
 
             if (Input.GetKey(_boostSpeed))
                 currentSpeed = _boostedSpeed;
-
-            if (Input.GetKey(_moveForward))
+            if (moveVector.y > 0)
                 deltaPosition += transform.forward;
-
-            if (Input.GetKey(_moveBackwards))
+            if (moveVector.y < 0)
                 deltaPosition -= transform.forward;
-
-            if (Input.GetKey(_moveLeft))
+            if (moveVector.x < 0)
                 deltaPosition -= transform.right;
-
-            if (Input.GetKey(_moveRight))
+            if (moveVector.x > 0)
                 deltaPosition += transform.right;
-
-            if (Input.GetKey(_moveUp))
+            if (upDownVector > 0)
                 deltaPosition += transform.up;
-
-            if (Input.GetKey(_moveDown))
+            if (upDownVector < 0)
                 deltaPosition -= transform.up;
 
             // Calc acceleration
             CalculateCurrentIncrease(deltaPosition != Vector3.zero);
-
             transform.position += deltaPosition * currentSpeed * _currentIncrease;
         }
 
@@ -225,24 +210,15 @@ public class FreeFlyCamera : MonoBehaviour
         if (_enableRotation)
         {
             // Pitch
-            transform.rotation *= Quaternion.AngleAxis(
-                -Input.GetAxis("Mouse Y") * _mouseSense,
-                Vector3.right
-            );
-
+            transform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y + lookVector.x * _mouseSense, transform.eulerAngles.z);
             // Paw
-            transform.rotation = Quaternion.Euler(
-                transform.eulerAngles.x,
-                transform.eulerAngles.y + Input.GetAxis("Mouse X") * _mouseSense,
-                transform.eulerAngles.z
-            );
+            transform.rotation *= Quaternion.AngleAxis(lookVector.y * _mouseSense, Vector3.right);
         }
+    }
 
-        // Return to init position
-        if (Input.GetKeyDown(_initPositonButton))
-        {
-            transform.position = _initPosition;
-            transform.eulerAngles = _initRotation;
-        }
+    private void ResetPosition()
+    {
+        transform.position = _initPosition;
+        transform.eulerAngles = _initRotation;
     }
 }
