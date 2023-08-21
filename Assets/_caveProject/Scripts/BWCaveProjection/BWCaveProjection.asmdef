@@ -1,0 +1,16 @@
+{
+    "name": "BWCaveProjection",
+    "rootNamespace": "",
+    "references": [
+        "GUID:2f1dd022f2d7fe04a88a21c703ce946f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,18 @@
+{
+    "name": "BWSwitchInteractions",
+    "rootNamespace": "",
+    "references": [
+        "GUID:7048be0a063f97e4d9529d7a49fba4c4",
+        "GUID:bc1d585084faea54aa063641e548c50a",
+        "GUID:a11b4eb4f7ef5c8499df17e748735638"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

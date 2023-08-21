@@ -1,0 +1,19 @@
+{
+    "name": "BWInteractions",
+    "rootNamespace": "",
+    "references": [
+        "GUID:29492541a59d04a81b47a7f225e8a22d",
+        "GUID:14165214884ae4a619bfb290f28194a7",
+        "GUID:a11b4eb4f7ef5c8499df17e748735638",
+        "GUID:65491c6353ed57044898146c6cf95e01"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

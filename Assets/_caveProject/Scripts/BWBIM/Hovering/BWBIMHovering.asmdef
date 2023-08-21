@@ -1,0 +1,19 @@
+{
+    "name": "BWBIMHovering",
+    "rootNamespace": "",
+    "references": [
+        "GUID:26babe35fcd1c804ea26f8a8841571ce",
+        "GUID:5fbb4c2e59c6a4b4596566604f6906a4",
+        "GUID:29492541a59d04a81b47a7f225e8a22d",
+        "GUID:14165214884ae4a619bfb290f28194a7"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

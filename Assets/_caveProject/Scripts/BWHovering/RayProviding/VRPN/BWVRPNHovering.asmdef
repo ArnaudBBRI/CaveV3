@@ -1,0 +1,17 @@
+{
+    "name": "BWVRPNHovering",
+    "rootNamespace": "",
+    "references": [
+        "GUID:26babe35fcd1c804ea26f8a8841571ce",
+        "GUID:93c79552f7941044b975e7b544848e65"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

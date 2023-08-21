@@ -1,0 +1,19 @@
+{
+    "name": "BWSwitch",
+    "rootNamespace": "",
+    "references": [
+        "GUID:29492541a59d04a81b47a7f225e8a22d",
+        "GUID:14165214884ae4a619bfb290f28194a7",
+        "GUID:26babe35fcd1c804ea26f8a8841571ce",
+        "GUID:a11b4eb4f7ef5c8499df17e748735638"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
